@@ -1,10 +1,10 @@
 from typing import List
 from fastapi import Depends, status, APIRouter
-from .. import schemas
-from .. import database
+from blog import schemas
+from blog import database
 from sqlalchemy.orm import Session
-from ..repository import blog
-from .. import OAuth2
+from blog.repository import blog
+from blog import OAuth2
 
 get_db = database.get_db
 

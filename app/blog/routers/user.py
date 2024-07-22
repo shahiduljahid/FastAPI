@@ -1,10 +1,10 @@
 from fastapi import APIRouter
 from typing import List
 from fastapi import Depends, status
-from .. import schemas
-from .. import database
+from blog import schemas
+from blog import database
 from sqlalchemy.orm import Session
-from ..repository import user
+from blog.repository import user
 
 get_db = database.get_db
 router = APIRouter(tags=["Users"], prefix="/user")
