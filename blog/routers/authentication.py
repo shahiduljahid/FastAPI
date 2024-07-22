@@ -1,7 +1,7 @@
 from typing import Annotated
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from .. import models, database, schemas, token
+from .. import models, database, schemas, token_1
 from ..hashing import Hash
 from fastapi.security import OAuth2PasswordRequestForm
 
@@ -22,6 +22,6 @@ def login(
     if not Hash.verify(req.password, user.password):
         raise HTTPException(status_code=404, detail="Incorrect Password")
 
-    access_token = token.create_access_token(data={"sub": user.email})
+    access_token = token_1.create_access_token(data={"sub": user.email})
 
     return schemas.Token(access_token=access_token, token_type="bearer")
