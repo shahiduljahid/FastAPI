@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta, timezone
 from jose import jwt, JWTError
-from blog import schemas
+from . import schemas
 
 
 # to get a string like this run:
