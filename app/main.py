@@ -3,9 +3,7 @@ from blog import models
 from blog.database import engine
 from blog.routers import blog, user, authentication
 
-
 app = FastAPI()
-
 
 models.Base.metadata.create_all(bind=engine)
 
