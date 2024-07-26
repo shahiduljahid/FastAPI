@@ -4,3 +4,8 @@ SQLAlchemy
 passlib
 bcrypt
 python-jose
+pillow
+torch==2.0.0
+torchvision==0.15.0
+torchaudio==2.0.0
+torch_snippets
