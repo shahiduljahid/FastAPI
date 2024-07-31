@@ -15,6 +15,9 @@ label2targets = {l: t for t, l in enumerate(labels)}
 targets2label = {t: q for q, t in label2targets.items()}
 num_classes = len(targets2label)
 
+script_dir = os.path.dirname(__file__)
+file_path = os.path.join(script_dir + "\\saved_model.pkl")
+
 
 # Decode model output
 def decode_output(output):
@@ -59,7 +62,7 @@ def draw_annotations(draw, bbs, confs, labels):
 
 
 async def fruit_detector(image):
-    with open("saved_model.pkl", "rb") as f:
+    with open(file_path, "rb") as f:
         model = pickle.load(f)
         model.eval()
 
