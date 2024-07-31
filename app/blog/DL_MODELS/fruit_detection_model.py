@@ -4,8 +4,9 @@ from torchvision import transforms
 from torchvision.ops import nms
 from PIL import Image, ImageDraw, ImageFont
 import io
-import pickle
 import os
+import global_parameters
+
 
 device = "cpu"
 
@@ -77,15 +78,8 @@ def predict(image, model, device="cpu"):
     return buffer
 
 
-with open(file_path, "rb") as f:
-    loaded = pickle.load(f)
-loaded_model = loaded["model"]
-loaded_model.eval()
-loaded_predict = loaded["predict"]
-
-
 async def fruit_detector(image):
-
-    buffer = loaded_predict(image, loaded_model, device="cpu")
-
+    buffer = global_parameters.loaded_predict(
+        image, global_parameters.loaded_model, device="cpu"
+    )
     return buffer
