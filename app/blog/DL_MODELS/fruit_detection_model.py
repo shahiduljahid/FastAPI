@@ -61,30 +61,29 @@ def draw_annotations(draw, bbs, confs, labels):
         draw.text((text_x, text_y), text, fill="green", font=font)
 
 
-async def fruit_detector(image):
-    with open(file_path, "rb") as f:
-        model = pickle.load(f)
-        model.eval()
-
+def predict(image, model, device="cpu"):
     transform = transforms.Compose([transforms.ToTensor()])
     image_tensor = transform(image).to(device)
     model.eval()
-    # Make a prediction
     with torch.no_grad():
         output = model([image_tensor])[0]
-    # Decode the output
     bbs, confs, labels = decode_output(output)
-
-    # Convert the PIL image to a format where you can draw on it
     draw_image = image.copy()
     draw = ImageDraw.Draw(draw_image)
-
-    # Draw bounding boxes
-
     draw_annotations(draw, bbs, confs, labels)
-    # Save the image to a bytes buffer
     buffer = io.BytesIO()
     draw_image.save(buffer, format="PNG")
     buffer.seek(0)
+    return buffer
+
+
+async def fruit_detector(image):
+    with open(file_path, "rb") as f:
+        loaded = pickle.load(f)
+    loaded_model = loaded["model"]
+    loaded_model.eval()
+    loaded_predict = loaded["predict"]
+
+    buffer = loaded_predict(image, loaded_model, device="cpu")
 
     return buffer
