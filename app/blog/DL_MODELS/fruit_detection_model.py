@@ -77,12 +77,14 @@ def predict(image, model, device="cpu"):
     return buffer
 
 
+with open(file_path, "rb") as f:
+    loaded = pickle.load(f)
+loaded_model = loaded["model"]
+loaded_model.eval()
+loaded_predict = loaded["predict"]
+
+
 async def fruit_detector(image):
-    with open(file_path, "rb") as f:
-        loaded = pickle.load(f)
-    loaded_model = loaded["model"]
-    loaded_model.eval()
-    loaded_predict = loaded["predict"]
 
     buffer = loaded_predict(image, loaded_model, device="cpu")
 
