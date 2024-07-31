@@ -11,8 +11,6 @@ script_dir = os.path.dirname(__file__)
 file_path = os.path.join(script_dir + "/blog/DL_MODELS/saved_model.pkl")
 File_URL = "https://drive.google.com/uc?id=1J9LloeGpK2aYYeNnHeleS8BKg4VpjDQq"
 
-print(file_path)
-
 
 @app.on_event("startup")
 async def on_startup():
