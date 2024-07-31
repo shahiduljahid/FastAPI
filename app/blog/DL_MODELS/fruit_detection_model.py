@@ -39,7 +39,7 @@ optimizer = torch.optim.SGD(
 script_dir = os.path.dirname(__file__)
 checkpoint_path = os.path.join(script_dir + "\\checkpoints\\our_fast_r_cnn_model.pth")
 if os.path.exists(checkpoint_path):
-    
+
     load_checkpoint(
         torch.load(checkpoint_path),
         model,

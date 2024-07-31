@@ -8,7 +8,9 @@ import os
 
 app = FastAPI()
 script_dir = os.path.dirname(__file__)
-file_path = os.path.join(script_dir + "\\blog\\DL_MODELS\\checkpoints\\our_fast_r_cnn_model.pth")
+file_path = os.path.join(
+    script_dir + "\\blog\\DL_MODELS\\checkpoints\\our_fast_r_cnn_model.pth"
+)
 checkpoint_path_URL = "https://drive.google.com/uc?id=10GnsP8sXlH6mvzhVW79l-zDHrl2x2Z6L"
 
 
@@ -16,10 +18,6 @@ checkpoint_path_URL = "https://drive.google.com/uc?id=10GnsP8sXlH6mvzhVW79l-zDHr
 async def on_startup():
     # Download the file first
     await download_file_if_needed(file_path, checkpoint_path_URL)
-    
-# @app.on_event("startup")
-# def on_startup():
-#     download_file_if_needed(file_path, checkpoint_path_URL)
 
 
 models.Base.metadata.create_all(bind=engine)
