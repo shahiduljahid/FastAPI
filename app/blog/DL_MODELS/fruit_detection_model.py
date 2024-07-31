@@ -15,14 +15,6 @@ label2targets = {l: t for t, l in enumerate(labels)}
 targets2label = {t: q for q, t in label2targets.items()}
 num_classes = len(targets2label)
 
-model = None
-
-if os.path.exists("saved_model.pkl"):
-    # Load the saved model
-    with open("saved_model.pkl", "rb") as f:
-        model = pickle.load(f)
-        model.eval()
-
 
 # Decode model output
 def decode_output(output):
@@ -67,6 +59,10 @@ def draw_annotations(draw, bbs, confs, labels):
 
 
 async def fruit_detector(image):
+    with open("saved_model.pkl", "rb") as f:
+        model = pickle.load(f)
+        model.eval()
+
     transform = transforms.Compose([transforms.ToTensor()])
     image_tensor = transform(image).to(device)
     model.eval()
