@@ -16,7 +16,7 @@ targets2label = {t: q for q, t in label2targets.items()}
 num_classes = len(targets2label)
 
 script_dir = os.path.dirname(__file__)
-file_path = os.path.join(script_dir + "\\saved_model.pkl")
+file_path = os.path.join(script_dir, "saved_model.pkl")
 
 
 # Decode model output
